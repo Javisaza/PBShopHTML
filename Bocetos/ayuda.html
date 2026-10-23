@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pb-shop</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+
+    <header class="header-banner">
+        <div class="logo-container">
+            <img src="img/Pb-shop-logo.png" alt="PB Shop Logo" class="logo-image">
+            <h1>Shop</h1>
+            <p>El aliado del parche pascualino.</p>
+        </div>
+    </header>
+
+    <section class="navigation">
+        <div class="imagen-nav">
+            <img src="img/Pb-shop-logo.png">
+        </div>
+        <div class="navigation-bar">
+            <a href="index.html" class="menu_link" title="Ir a Inicio"><i class="fa-solid fa-house"></i></a>
+            <a href="carrito.html" class="menu_link" title="Ir a Carrito"><i class="fa-solid fa-shopping-cart"></i></a>
+            <a href="ayuda.html" class="menu_link" title="Ir a Ayuda"><i class="fa-solid fa-question-circle"></i></a>
+            <a href="perfil.html" class="menu_link" title="Ir a Perfil"><i class="fa-solid fa-user"></i></a>
+        </div>
+        <button class="navigation-btn" onclick="abrirMenu()">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <aside id="navigation-menu" class="menu-lateral">
+            <a href="javascript:void(0)" class="cerrar" onclick="cerrarMenu()">&times;</a>
+            <a href="index.html#inicio">Inicio</a>
+            <a href="index.html#catalogo">Catalogo</a>
+            <a href="index.html#especificaciones">Especificaciones</a>
+            <a href="index.html#promociones">Promociones</a>
+            <a href="index.html#categorias">Categorias</a>
+            <a href="index.html#medicion">Medición</a>
+            <a href="index.html#contacto">Contacto</a>
+            <div class="theme-container">
+                <span class="theme-label">Tema</span>
+                <label class="toggle">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </aside>
+    </section>
+
+    <main class="contenido">
+        <section class="seccion" id="ayuda">
+            <h2 class="seccion_titulo">Centro de Ayuda</h2>
+            <p>¿Tienes dudas? Estamos aquí para ayudarte.</p>
+            <br>
+            <div>
+                <h3><i class="fa-solid fa-circle-info"></i> Preguntas Frecuentes (FAQ)</h3>
+                
+                <dl>
+                    <dt>¿Cuánto tarda en llegar mi pedido?</dt>
+                    <dd>Dependiendo de tu ubicación dentro de la U, normalmente tardamos entre 10 a 15 minutos en llevarlo a tu bloque o punto de encuentro.</dd>
+                    
+                    <dt>¿Cuáles son los métodos de pago?</dt>
+                    <dd>Aceptamos efectivo al momento de la entrega, transferencias por Nequi/Daviplata y tarjeta (Contamos con datáfono portátil).</dd>
+                    
+                    <dt>¿Qué pasa si mi pedido llega frío o en mal estado?</dt>
+                    <dd>¡Cuentas con nuestra garantía! Escríbenos inmediatamente y te reponemos el producto sin costo adicional.</dd>
+                </dl>
+            </div>
+            <br>
+            <div>
+                <h3><i class="fa-solid fa-envelope"></i> ¿Aún necesitas ayuda? Escríbenos</h3>
+                <form id="formulario" class="formulario">
+                    <label for="asunto">Asunto del problema:</label>
+                    <input type="text" id="asunto" name="asunto" required placeholder="Ej: Problema con mi pedido #0015">
+                    <br>
+                    <label for="mensaje">Descripción detallada:</label>
+                    <textarea id="mensaje" name="mensaje" rows="4" required placeholder="Detalla tu problema o duda aquí para que podamos solucionarlo..."></textarea>
+                    <br>
+                    <button type="submit">Enviar Consulta</button>
+                </form>
+            </div>
+        </section>
+        <section id="lista-inscritos">
+            <h2>Aspirantes Registrados</h2>
+            <table border="1" id="tabla-contacto">
+                <thead>
+                    <tr>
+                        <th>Asunto</th>
+                        <th>Descripcion</th>
+                        <th>Fecha de Envio</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpo-tabla"></tbody>
+                    </tbody>
+            </table>
+        </section>
+    </main>
+    <footer class="footer-principal">
+        <div class="footer-contenido">
+            <address class="footer-direccion">
+                <strong>PB Shop</strong><br>
+                <i class="fa-solid fa-location-dot"></i> Calle 38a # 73A - 226<br>
+                Medellín, Antioquia<br>
+                <i class="fa-solid fa-envelope"></i> <label>contacto@pbshop.com</label>
+            </address>
+            <div class="footer-sociales">
+                <a href="#" aria-label="Facebook" title="Facebook"><i class="fa-brands fa-facebook"></i><label for="facebook"> @Pb-shop</label></a>
+                <a href="#" aria-label="Instagram" title="Instagram"><i class="fa-brands fa-instagram"><label for="instagram"> @pbshop</label></i></a>
+                <a href="#" aria-label="WhatsApp" title="WhatsApp"><i class="fa-brands fa-whatsapp"><label for="whatsapp"> +57 300 123 4567</label></i></a>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>&copy; 2026 PB Shop. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    <script src="js/script.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

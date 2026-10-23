@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pb-shop</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="header-banner">
+        <div class="logo-container">
+            <img src="img/Pb-shop-logo.png" alt="PB Shop Logo" class="logo-image">
+            <h1>Shop</h1>
+            <p>El aliado del parche pascualino.</p>
+        </div>
+    </header>
+
+    <section class="navigation">
+        <div class="imagen-nav">
+            <img src="img/Pb-shop-logo.png">
+        </div>
+
+        <div class="navigation-bar">
+            <a href="index.html" class="menu_link"><i class="fa-solid fa-house"></i></a>
+            <a href="carrito.html" class="menu_link"><i class="fa-solid fa-shopping-cart"></i></a>
+            <a href="ayuda.html" class="menu_link"><i class="fa-solid fa-question-circle"></i></a>
+            <a href="perfil.html" class="menu_link"><i class="fa-solid fa-user"></i></a>
+        </div>
+
+        <button class="navigation-btn" onclick="abrirMenu()">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <aside id="navigation-menu" class="menu-lateral">
+            <a href="javascript:void(0)" class="cerrar" onclick="cerrarMenu()">&times;</a>
+            <a href="index.html#inicio">Inicio</a>
+            <a href="index.html#catalogo">Catalogo</a>
+            <a href="index.html#especificaciones">Especificaciones</a>
+            <a href="index.html#promociones">Promociones</a>
+            <a href="index.html#categorias">Categorias</a>
+            <a href="index.html#medicion">Medición</a>
+            <a href="index.html#contacto">Contacto</a>
+            <div class="theme-container">
+                <span class="theme-label">Tema</span>
+                <label class="toggle">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </aside>
+    </section>
+
+    <main class="contenido">
+        <section class="seccion" id="mi-cuenta">
+            <h2 class="seccion_titulo">Mi Cuenta</h2>
+            <br>
+
+            <div class="perfil-info">
+                <div class="perfil-header">
+                    <i class="fa-solid fa-circle-user"></i>
+                    <h3 id="perfil-nombre">Diego Mazo</h3>
+                    <p><em>Miembro desde Agosto 2026</em></p>
+                </div>
+
+                <form class="formulario" action="#" method="POST">
+                    <label for="nombre">Nombre completo:</label>
+                    <input type="text" id="nombre" name="nombre" required readonly placeholder="Diego Mazo">
+                    <br>
+
+                    <label for="correo">Correo Electrónico:</label>
+                    <input type="email" id="correo" name="correo" required placeholder="ejemplo@gmail.com" readonly>
+                    <br>
+
+                    <label for="telefono">Teléfono celular:</label>
+                    <input type="tel" id="telefono" name="telefono" required placeholder="+57 300 000 0000" readonly>
+                    <br>
+
+                    <label for="direccion">Dirección:</label>
+                    <input type="text" id="direccion" name="direccion" required readonly placeholder="Cra 81 #3 a sur 108">
+                    <br>
+
+                    <button type="button" class="btn-detalles">Editar Datos</button>
+                </form>
+
+
+                <fieldset>
+                    <legend>Estado de Suscripción</legend>
+                    <p><strong>Plan Actual:</strong> Suscripción + <i class="fa-solid fa-star"></i></p>
+                    <p><strong>Estado:</strong> <span>Activo</span></p>
+                    <p><strong>Próximo cobro:</strong> 15 de Octubre, 2026</p>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Últimos Pedidos</legend>
+                    <ul>
+                        <li>
+                            <strong>Pedido #0015</strong> - 02/09/2026 <br>
+                            <em>2x Sándwich de la casa, 2x Limonada de coco</em> - <strong>Entregado</strong>
+                        </li>
+                        <li>
+                            <strong>Pedido #0008</strong> - 28/08/2026 <br>
+                            <em>1x Brunch Campesino Completo, 1x Capuchino</em> - <strong>Entregado</strong>
+                        </li>
+                    </ul>
+                </fieldset>
+
+                <br>
+                <div>
+                    <button class="btn-pagar">Cerrar Sesión</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-principal">
+        <div class="footer-contenido">
+            <address class="footer-direccion">
+                <strong>PB Shop</strong><br>
+                <i class="fa-solid fa-location-dot"></i> Calle 38a # 73A - 226<br>
+                Medellín, Antioquia<br>
+                <i class="fa-solid fa-envelope"></i> contacto@pbshop.com
+            </address>
+
+            <div class="footer-sociales">
+                <a href="#"><i class="fa-brands fa-facebook"></i> @Pb-shop</a>
+                <a href="#"><i class="fa-brands fa-instagram"></i> @pbshop</a>
+                <a href="#"><i class="fa-brands fa-whatsapp"></i> +57 300 123 4567</a>
+            </div>
+        </div>
+
+        <div class="footer-copyright">
+            <p>&copy; 2026 PB Shop. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

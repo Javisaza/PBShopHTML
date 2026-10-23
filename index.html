@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PB Shop | El aliado del parche pascualino</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-banner">
+            <div class="logo-container">
+                <img src="img/Pb-shop-logo.png" alt="PB Shop Logo" class="logo-image">
+                <h1>Shop</h1>
+                <p>El aliado del parche pascualino.</p>
+            </div>
+        </div>
+
+        <section class="navigation">
+            <div class="imagen-nav">
+                <img src="img/Pb-shop-logo.png" alt="Logo de navegación PB Shop">
+            </div>
+            <nav class="navigation-bar">
+                <a href="index.html" class="menu_link" title="Ir a Inicio"><i class="fa-solid fa-house"></i></a>
+                <a href="carrito.html" class="menu_link" title="Ir a Carrito"><i class="fa-solid fa-shopping-cart"></i></a>
+                <a href="ayuda.html" class="menu_link" title="Ir a Ayuda"><i class="fa-solid fa-question-circle"></i></a>
+                <a href="admin.html" class="menu_link" title="Ir a Admin"><i class="fa-solid fa-user"></i></a>
+            </nav>
+
+            <button class="navigation-btn" id="btn-menu-abrir" aria-label="Abrir menú">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <nav id="navigation-menu" class="menu-lateral" aria-label="Secciones de la página">
+                <a href="javascript:void(0)" class="cerrar" id="btn-menu-cerrar">&times;</a>
+                <a href="#inicio">Inicio</a>
+                <a href="#catalogo">Catálogo</a>
+                <a href="#especificaciones">Especificaciones</a>
+                <a href="#promociones">Promociones</a>
+                <a href="#categorias">Categorías</a>
+                <a href="#medicion">Medición</a>
+                <a href="#contacto">Contacto</a>
+                <div class="theme-container">
+                    <span class="theme-label">Tema</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="theme-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </nav>
+        </section>
+    </header>
+
+    <main class="contenido">
+        <section class="seccion" id="inicio">
+            <h2 class="seccion_titulo">Inicio</h2>
+            <p>Bienvenido a la tienda virtual <b>PB Shop</b> donde encontrarás una gran variedad de productos para disfrutar en tu día a día de la <b>U</b>.</p>
+        </section>
+
+        <section class="catalogo" id="catalogo">
+            <h2>Catálogo de Productos</h2>
+            <br>
+            <div class="buscador-container">
+                <!-- Formulario de búsqueda -->
+                <form id="form-buscador">
+                    <input type="search" id="input-busqueda" placeholder="Buscar producto">
+                </form>
+
+                <!-- Botón de filtros (en teléfono despliega el aside) -->
+                <button class="btn-filtros-toggle" id="btn-filtros">
+                    <i class="fa-solid fa-filter"></i>
+                    <span>Filtros y Categorías</span>
+                    <i class="fa-solid fa-chevron-down flecha-filtros" id="flecha-filtros"></i>
+                </button>
+
+            </div>
+
+            <!-- Contador de resultados de la búsqueda -->
+            <div id="contador-resultados" class="contador-resultados"></div>
+
+            <!-- Diseño de dos columnas: barra lateral + contenido (en teléfono, una columna con el aside arriba) -->
+            <div class="catalogo-layout">
+
+                <!-- Barra lateral: filtros (los crea JavaScript) -->
+                <aside id="filtros-menu" class="aside-filtros-desplegable">
+                    <div class="aside-grid" id="aside-filtros"></div>
+
+                    <!-- Filtros extra: estado de inventario y rango de precio -->
+                    <div class="filtros-extra">
+                        <div class="filtro-grupo">
+                            <label for="filtro-estado">Estado de inventario</label>
+                            <select id="filtro-estado">
+                                <option value="">Todos</option>
+                                <option value="disponible">Disponible</option>
+                                <option value="bajo">Stock Bajo</option>
+                                <option value="agotado">Agotado</option>
+                            </select>
+                        </div>
+
+                        <div class="filtro-grupo">
+                            <span class="filtro-etiqueta">Rango de precio (COP)</span>
+                            <div class="rango-precio">
+                                <div class="campo-precio">
+                                    <label for="filtro-precio-min">Precio mínimo</label>
+                                    <input type="number" id="filtro-precio-min" min="0" step="500" placeholder="Ej: 2000">
+                                </div>
+                                <span class="rango-separador">–</span>
+                                <div class="campo-precio">
+                                    <label for="filtro-precio-max">Precio máximo</label>
+                                    <input type="number" id="filtro-precio-max" min="0" step="500" placeholder="Ej: 10000">
+                                </div>
+                            </div>
+                            <p id="error-precio" class="error-alerta"></p>
+                        </div>
+
+                        <button type="button" class="btn-limpiar-filtros" id="btn-limpiar-filtros">
+                            <i class="fa-solid fa-rotate-left"></i> Limpiar filtros
+                        </button>
+                    </div>
+
+                </aside>
+
+                <div class="catalogo-contenido">
+
+
+                    <!-- Contenedor de tarjetas: lo llena JavaScript -->
+                    <div class="catalogo-grid" id="grid-productos"></div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="especificaciones" id="especificaciones">
+            <h2 class="seccion_titulo">Especificaciones</h2>
+            <br>
+            <div class="especificaciones-grid">
+
+                <article class="especificacion" id="Porcion-Pizza">
+                    <div class="especificaciones-left">
+                        <h3>Porción Pizza</h3>
+                        <img src="img/productos/pizza.jpeg" alt="Porcion Pizza">
+                    </div>
+                    <div class="especificaciones-right">
+                        <dl>
+                            <dt>Ingredientes</dt><dd>Queso, piña, jamón</dd>
+                            <dt>Tamaño</dt><dd>Porción individual</dd>
+                            <dt>Disponibilidad</dt><dd>En stock</dd>
+                        </dl>
+                    </div>
+                </article>
+
+                <article class="especificacion" id="Limonada-coco-cereza">
+                    <div class="especificaciones-left">
+                        <h3>Limonada de coco / cereza</h3>
+                        <img src="img/productos/limonadas.jpeg" alt="Limonada de coco / cereza">
+                    </div>
+                    <div class="especificaciones-right">
+                        <dl>
+                            <dt>Presentación</dt><dd>Vaso 500ml</dd>
+                            <dt>Tipo</dt><dd>Bebida fría</dd>
+                            <dt>Disponibilidad</dt><dd>En stock</dd>
+                        </dl>
+                    </div>
+                </article>
+
+                <article class="especificacion" id="Granizado-cafe">
+                    <div class="especificaciones-left">
+                        <h3>Granizado de café</h3>
+                        <img src="img/productos/cafeFrio.jpeg" alt="Granizado de café">
+                    </div>
+                    <div class="especificaciones-right">
+                        <dl>
+                            <dt>Presentación</dt><dd>Vaso 500ml</dd>
+                            <dt>Tipo</dt><dd>Bebida fría</dd>
+                            <dt>Disponibilidad</dt><dd>En stock</dd>
+                        </dl>
+                    </div>
+                </article>
+
+                <article class="especificacion" id="Cafe-origen-bolsa">
+                    <div class="especificaciones-left">
+                        <h3>Café de origen en bolsa</h3>
+                        <img src="img/productos/bolsaCafe.png" alt="Café de origen en bolsa">
+                    </div>
+                    <div class="especificaciones-right">
+                        <dl>
+                            <dt>Contenido</dt><dd>250g</dd>
+                            <dt>Origen</dt><dd>Antioquia</dd>
+                            <dt>Disponibilidad</dt><dd>En stock</dd>
+                        </dl>
+                    </div>
+                </article>
+
+                <article class="especificacion" id="Capuchino">
+                    <div class="especificaciones-left">
+                        <h3>Capuchino</h3>
+                        <img src="img/productos/cafe.jpeg" alt="Capuchino">
+                    </div>
+                    <div class="especificaciones-right">
+                        <dl>
+                            <dt>Tipo</dt><dd>Café expreso con leche vaporizada</dd>
+                            <dt>Presentación</dt><dd>Taza 250ml</dd>
+                            <dt>Disponibilidad</dt><dd>En stock</dd>
+                        </dl>
+                    </div>
+                </article>
+
+                <article class="especificacion" id="Brunch-Campesino-Completo">
+                    <div class="especificaciones-left">
+                        <h3>Brunch Campesino Completo</h3>
+                        <img src="img/productos/desayuno.jpeg" alt="Brunch Campesino Completo">
+                    </div>
+                    <div class="especificaciones-right">
+                        <dl>
+                            <dt>Incluye</dt><dd>Arepa, huevo revuelto, quesito, calentado y café en leche</dd>
+                            <dt>Porción</dt><dd>Individual</dd>
+                            <dt>Disponibilidad</dt><dd>En stock</dd>
+                        </dl>
+                    </div>
+                </article>
+
+                <article class="especificacion" id="Sandwich-casa">
+                    <div class="especificaciones-left">
+                        <h3>Sándwich de la casa</h3>
+                        <img src="img/productos/sandwich.jpeg" alt="Sándwich de la casa">
+                    </div>
+                    <div class="especificaciones-right">
+                        <dl>
+                            <dt>Ingredientes</dt><dd>Pan tostado, ingredientes frescos, salsa especial</dd>
+                            <dt>Presentación</dt><dd>Porción individual</dd>
+                            <dt>Disponibilidad</dt><dd>En stock</dd>
+                        </dl>
+                    </div>
+                </article>
+
+                <article class="especificacion" id="Torta-cafe-chocolate">
+                    <div class="especificaciones-left">
+                        <h3>Torta de café o chocolate</h3>
+                        <img src="img/productos/torta.jpeg" alt="Torta de café o chocolate">
+                    </div>
+                    <div class="especificaciones-right">
+                        <dl>
+                            <dt>Sabor</dt><dd>Café o chocolate</dd>
+                            <dt>Porción</dt><dd>Individual</dd>
+                            <dt>Disponibilidad</dt><dd>En stock</dd>
+                        </dl>
+                    </div>
+                </article>
+
+                <article class="especificacion" id="Paleta-cafe">
+                    <div class="especificaciones-left">
+                        <h3>Paleta de café</h3>
+                        <img src="img/productos/paletaCafe.jpeg" alt="Paleta de café">
+                    </div>
+                    <div class="especificaciones-right">
+                        <dl>
+                            <dt>Tipo</dt><dd>Helado artesanal</dd>
+                            <dt>Sabor</dt><dd>Café de origen</dd>
+                            <dt>Disponibilidad</dt><dd>En stock</dd>
+                        </dl>
+                    </div>
+                </article>
+
+                <article class="especificacion" id="Yogurt-frutas">
+                    <div class="especificaciones-left">
+                        <h3>Yogurt con frutas</h3>
+                        <img src="img/productos/avena.jpeg" alt="Yogurt con frutas">
+                    </div>
+                    <div class="especificaciones-right">
+                        <dl>
+                            <dt>Ingredientes</dt><dd>Frutas, granola, yogurt</dd>
+                            <dt>Presentación</dt><dd>Tazón individual</dd>
+                            <dt>Disponibilidad</dt><dd>En stock</dd>
+                        </dl>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="seccion" id="promociones">
+            <h2 class="seccion_titulo">Promociones</h2>
+            <br>
+            <div class="promociones-grid">
+                <article class="promocion">
+                    <img src="img/promociones/30-descuento.jpg" alt="Promoción combo pizza y bebida">
+                    <h3>Promoción 1</h3>
+                    <p>Adquiere 2 porciones de pizza y obtén un 30% de descuento en tus bebidas.</p>
+                    <h5>Válida hasta el 31 de octubre</h5>
+                    <h6>Aplican términos y condiciones</h6>
+                </article>
+                <article class="promocion">
+                    <img src="img/promociones/ahorro.png" alt="Suscripción Plus">
+                    <h3>Suscripción +</h3>
+                    <p>Con nuestra suscripción mensual, disfrutas de ahorro, comodidad y beneficios exclusivos mientras apoyas la estabilidad y crecimiento del negocio.</p>
+                    <h6>Aplican términos y condiciones</h6>
+                </article>
+                <article class="promocion">
+                    <img src="img/promociones/rifa.jpg" alt="Rifa bono de compra">
+                    <h3>Promoción 2</h3>
+                    <p>Por compras superiores a 50.000 COP participa en la rifa de un bono de 250.000 COP redimible en nuestros productos.</p>
+                    <h5>Válida hasta el 15 de octubre</h5>
+                    <h6>Aplican términos y condiciones</h6>
+                </article>
+            </div>
+            <br>
+            <div class="tabla-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Plan de Garantía</th>
+                            <th>Duración</th>
+                            <th>Cobertura</th>
+                            <th>Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Básico</td>
+                            <td>1 Mes</td>
+                            <td>10% de descuento en compras mayores a 30.000</td>
+                            <td>$10.000/mes</td>
+                        </tr>
+                        <tr>
+                            <td>Pro</td>
+                            <td>1 Mes</td>
+                            <td>10% de descuento</td>
+                            <td>$15.000/mes</td>
+                        </tr>
+                        <tr>
+                            <td>Premium</td>
+                            <td>1 Mes</td>
+                            <td>10% de descuento y domicilio gratuito</td>
+                            <td>$35.000/mes</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4">Nota: Todos los precios mostrados ya incluyen IVA.</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+
+        <section class="categorias" id="categorias">
+            <h2 class="seccion_titulo">Categorías</h2>
+            <br>
+            <ul>
+                <li><strong>Bebidas:</strong> Limonadas, granizados de café y capuchino.</li>
+                <li><strong>Desayunos:</strong> Brunch Campesino Completo, Sándwich de la casa y Torta de café o chocolate.</li>
+                <li><strong>Postres:</strong> Paleta de café y Yogurt con frutas.</li>
+                <li><strong>Otros:</strong> Porción Pizza y Café en bolsa.</li>
+            </ul>
+        </section>
+
+        <section class="seccion" id="medicion">
+            <h2 class="seccion_titulo">Medición</h2>
+            <br>
+            <label for="meta-ventas">Meta de ventas mensuales: </label><br>
+            <span>0</span>
+            <progress id="meta-ventas" value="84" max="200"></progress>
+            <span>200 ventas</span>
+            <br><br>
+
+            <label for="stock-pizza">Stock disponible de nuestra deliciosa pizza: </label><br>
+            <span>0</span>
+            <progress id="stock-pizza" value="30" max="100"></progress>
+            <span>100 unidades</span>
+            <br><br>
+
+            <label for="calificacion">Calificación de satisfacción de clientes: </label><br>
+            <span>1.0</span>
+            <meter id="calificacion" value="4.3" min="0" max="5" low="2.5" high="4" optimum="5"></meter>
+            <span>5.0⭐</span>
+        </section>
+
+        <section class="seccion" id="contacto">
+            <h2 class="seccion_titulo">Contacto</h2>
+            <h3 class="seccion_titulo">Información de contacto</h3>
+            <p>Los campos con asterisco (*) son obligatorios</p>
+
+            <form class="formulario" id="form-contacto">
+                <label for="nombre">Nombre completo*:</label>
+                <input type="text" id="nombre" name="nombre" required minlength="3">
+                <br>
+
+                <label for="correo">Correo Electrónico*:</label>
+                <input type="email" id="correo" name="correo" required placeholder="ejemplo@gmail.com">
+                <br>
+
+                <label for="telefono">Teléfono celular*:</label>
+                <input type="tel" id="telefono" name="telefono" required pattern="[0-9+ ]{10,15}" title="Solo números, espacios o +, entre 10 y 15 caracteres" placeholder="+57 300 000 0000">
+                <br>
+
+                <label for="direccion">Dirección*:</label>
+                <input type="text" id="direccion" name="direccion" required minlength="5">
+                <br>
+
+                <label for="ciudad">Ciudad*:</label>
+                <input type="text" id="ciudad" name="ciudad" required minlength="3">
+                <br>
+
+                <label for="mensaje">Indicaciones adicionales (opcional):</label>
+                <textarea id="mensaje" name="mensaje" rows="4" placeholder="Escribe tus indicaciones aquí..."></textarea>
+                <br>
+
+                <button type="submit" id="enviar">Enviar</button>
+            </form>
+            <div id="mensaje-contacto-exito" class="mensaje-exito"></div>
+            <br>
+
+            <div class="tabla-responsive">
+                <table id="tabla-contacto">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Teléfono</th>
+                            <th>Dirección</th>
+                            <th>Ciudad</th>
+                            <th>Mensaje</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpoTabla"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-principal">
+        <div class="footer-contenido">
+            <address class="footer-direccion">
+                <strong>PB Shop</strong><br>
+                <i class="fa-solid fa-location-dot"></i> Calle 38a # 73A - 226<br>
+                Medellín, Antioquia<br>
+                <i class="fa-solid fa-envelope"></i> <span>contacto@pbshop.com</span>
+            </address>
+            <div class="footer-sociales">
+                <a href="#" aria-label="Facebook" title="Facebook"><i class="fa-brands fa-facebook"></i> <span>@Pb-shop</span></a>
+                <a href="#" aria-label="Instagram" title="Instagram"><i class="fa-brands fa-instagram"></i> <span>@pbshop</span></a>
+                <a href="#" aria-label="WhatsApp" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i> <span>+57 300 123 4567</span></a>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>&copy; 2026 PB Shop. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/modelo.js"></script>
+    <script src="js/vista.js"></script>
+    <script src="js/controlador.js"></script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PB Shop | Administración</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body data-rol="admin">
+
+    <header>
+        <div class="header-banner">
+            <div class="logo-container">
+                <img src="img/Pb-shop-logo.png" alt="PB Shop Logo" class="logo-image">
+                <h1>Shop</h1>
+                <p>El aliado del parche pascualino.</p>
+            </div>
+        </div>
+
+        <section class="navigation">
+            <div class="imagen-nav">
+                <img src="img/Pb-shop-logo.png" alt="Logo de navegación PB Shop">
+            </div>
+            <nav class="navigation-bar">
+                <a href="index.html" class="menu_link" title="Ir a la tienda"><i class="fa-solid fa-store"></i></a>
+                <a href="admin.html" class="menu_link" title="Panel de administración"><i class="fa-solid fa-screwdriver-wrench"></i></a>
+            </nav>
+
+            <button class="navigation-btn" id="btn-menu-abrir" aria-label="Abrir menú">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <nav id="navigation-menu" class="menu-lateral" aria-label="Secciones de la página">
+                <a href="javascript:void(0)" class="cerrar" id="btn-menu-cerrar">&times;</a>
+                <a href="#inicio">Inicio</a>
+                <a href="#catalogo">Productos</a>
+                <a href="#resumen-registros">Resumen de registros</a>
+                <a href="index.html">Ver tienda</a>
+                <div class="theme-container">
+                    <span class="theme-label">Tema</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="theme-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </nav>
+        </section>
+    </header>
+
+    <main class="contenido">
+        <section class="seccion" id="inicio">
+            <h2 class="seccion_titulo">Panel de Administración</h2>
+            <p>Desde aquí puedes <b>agregar</b>, <b>editar</b> y <b>eliminar</b> los productos de <b>PB Shop</b>. Los cambios se guardan en el navegador y se ven de inmediato en la tienda.</p>
+        </section>
+
+        <section class="catalogo" id="catalogo">
+            <h2>Gestión de Productos</h2>
+            <br>
+            <div class="buscador-container">
+                <form id="form-buscador">
+                    <input type="search" id="input-busqueda" placeholder="Buscar producto">
+                </form>
+
+                <button class="btn-filtros-toggle" id="btn-filtros">
+                    <i class="fa-solid fa-filter"></i>
+                    <span>Filtros y Categorías</span>
+                    <i class="fa-solid fa-chevron-down flecha-filtros" id="flecha-filtros"></i>
+                </button>
+
+                <!-- Botón de agregar producto -->
+                <button class="btn-abrir-modal" id="btn-abrir-modal">
+                    <i class="fa-solid fa-plus-circle"></i> Agregar Nuevo Producto
+                </button>
+            </div>
+
+            <div id="contador-resultados" class="contador-resultados"></div>
+
+            <div class="catalogo-layout">
+
+                <aside id="filtros-menu" class="aside-filtros-desplegable">
+                    <div class="aside-grid" id="aside-filtros"></div>
+
+                    <!-- Filtros extra: estado de inventario y rango de precio -->
+                    <div class="filtros-extra">
+                        <div class="filtro-grupo">
+                            <label for="filtro-estado">Estado de inventario</label>
+                            <select id="filtro-estado">
+                                <option value="">Todos</option>
+                                <option value="disponible">Disponible</option>
+                                <option value="bajo">Stock Bajo</option>
+                                <option value="agotado">Agotado</option>
+                            </select>
+                        </div>
+
+                        <div class="filtro-grupo">
+                            <span class="filtro-etiqueta">Rango de precio (COP)</span>
+                            <div class="rango-precio">
+                                <div class="campo-precio">
+                                    <label for="filtro-precio-min">Precio mínimo</label>
+                                    <input type="number" id="filtro-precio-min" min="0" step="500" placeholder="Ej: 2000">
+                                </div>
+                                <span class="rango-separador">–</span>
+                                <div class="campo-precio">
+                                    <label for="filtro-precio-max">Precio máximo</label>
+                                    <input type="number" id="filtro-precio-max" min="0" step="500" placeholder="Ej: 10000">
+                                </div>
+                            </div>
+                            <p id="error-precio" class="error-alerta"></p>
+                        </div>
+
+                        <button type="button" class="btn-limpiar-filtros" id="btn-restaurar">
+                            <i class="fa-solid fa-database"></i> Restaurar datos de ejemplo
+                        </button>
+
+                        <button type="button" class="btn-limpiar-filtros" id="btn-limpiar-filtros">
+                            <i class="fa-solid fa-rotate-left"></i> Limpiar filtros
+                        </button>
+                    </div>
+
+                    <div class="resumen-caja" id="resumen-inventario">
+                        <h4>📊 Resumen de Inventario</h4>
+                        <p>Total de registros: <strong id="resumen-total">0</strong></p>
+                        <p>Productos agotados: <strong id="resumen-agotados">0</strong></p>
+                        <p>Valor total del inventario: <strong id="resumen-valor">$0</strong></p>
+                    </div>
+                </aside>
+
+                <div class="catalogo-contenido">
+
+                    <!-- Estructura del Modal (Ventana Emergente) -->
+                    <div id="modal-producto" class="modal-overlay">
+                        <div class="modal-content">
+                            <button class="modal-cerrar" id="btn-cerrar-modal">&times;</button>
+
+                            <h2 class="seccion_titulo"><i class="fa-solid fa-box-open"></i> Agregar Nuevo Producto</h2>
+                            <p class="modal-subtitulo">Completa los datos para registrar un nuevo artículo en la tienda.</p>
+                            <br>
+
+                            <form id="form-nuevo-producto" class="formulario" novalidate>
+                                <label for="nuevo-nombre">Nombre del Producto*:</label>
+                                <input type="text" id="nuevo-nombre" placeholder="Ej: Empanada de Pollo">
+
+                                <label for="nuevo-precio">Precio (COP)*:</label>
+                                <input type="number" id="nuevo-precio" placeholder="Ej: 3500" min="0">
+
+                                <label for="nueva-cantidad">Cantidad en stock*:</label>
+                                <input type="number" id="nueva-cantidad" placeholder="Ej: 20" min="0">
+
+                                <label for="nueva-categoria">Categoría*:</label>
+                                <select id="nueva-categoria">
+                                    <option value="">Seleccione una categoría</option>
+                                    <option value="Comida y Gastronomía">Comida y Gastronomía</option>
+                                    <option value="Moda Universitaria">Moda Universitaria</option>
+                                    <option value="Útiles y Papelería">Útiles, Papelería y Libros</option>
+                                    <option value="Tecnología">Tecnología y Accesorios</option>
+                                    <option value="Estilo de Vida">Estilo de Vida, Regalos y Varios</option>
+                                </select>
+                                <label for="nueva-subcategoria">Subcategoría*:</label>
+                                <select id="nueva-subcategoria" disabled>
+                                    <option value="">Primero seleccione una categoría</option>
+                                </select>
+
+                                <label for="nueva-imagen">Imagen del producto*:</label>
+                                <input type="file" id="nueva-imagen" accept="image/*">
+                                <img id="vista-previa-imagen" class="vista-previa oculto" alt="Vista previa de la imagen seleccionada">
+
+                                <label for="nueva-descripcion">Descripción*:</label>
+                                <textarea id="nueva-descripcion" rows="3" placeholder="Descripción breve del producto..."></textarea>
+
+                                <div class="modal-botones">
+                                    <button type="button" class="btn-cancelar" id="btn-cancelar-modal">Cancelar</button>
+                                    <button type="submit" class="btn-guardar">
+                                        <i class="fa-solid fa-check"></i> Guardar Producto
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Contenedor de tarjetas: lo llena JavaScript -->
+                    <div class="catalogo-grid" id="grid-productos"></div>
+
+                    <div id="resumen-registros">
+                    <h3>Resumen de registros</h3>
+                    <div class="tabla-responsive">
+                        <table id="tabla-resumen">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Categoría</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cuerpo-resumen"></tbody>
+                        </table>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-principal">
+        <div class="footer-contenido">
+            <address class="footer-direccion">
+                <strong>PB Shop</strong><br>
+                <i class="fa-solid fa-location-dot"></i> Calle 38a # 73A - 226<br>
+                Medellín, Antioquia<br>
+                <i class="fa-solid fa-envelope"></i> <span>contacto@pbshop.com</span>
+            </address>
+            <div class="footer-sociales">
+                <a href="#" aria-label="Facebook" title="Facebook"><i class="fa-brands fa-facebook"></i> <span>@Pb-shop</span></a>
+                <a href="#" aria-label="Instagram" title="Instagram"><i class="fa-brands fa-instagram"></i> <span>@pbshop</span></a>
+                <a href="#" aria-label="WhatsApp" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i> <span>+57 300 123 4567</span></a>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>&copy; 2026 PB Shop. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/modelo.js"></script>
+    <script src="js/vista.js"></script>
+    <script src="js/controlador.js"></script>
+</body>
+</html>
