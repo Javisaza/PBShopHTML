@@ -1,6 +1,6 @@
 // ==========================================
 // VISTA: solo dibuja y lee el HTML
-// No valida reglas ni guarda datos.
+
 // ==========================================
 
 // Iconos de Font Awesome para cada categoría del panel de filtros
@@ -16,7 +16,7 @@ const iconosCategoria = {
 const esAdmin = document.body.dataset.rol === 'admin';
 
 // Estado propio de la vista
-let imagenSeleccionada = ''; // Imagen elegida en el explorador (en formato data URL)
+let imagenSeleccionada = ''; // Imagen elegida en el explorador
 let temporizadorAviso = null;
 
 // Referencias a los elementos de la página
@@ -68,7 +68,7 @@ const cuerpoCarrito = document.getElementById('cuerpoCarrito');
 const totalCarrito = document.getElementById('totalCarrito');
 const formPedido = document.getElementById('formPedido');
 
-// Campo del modelo -> elemento del formulario (para marcar errores)
+// Campo del modelo -> elemento del formulario
 const camposFormulario = {
   nombre: inputNombre,
   precio: inputPrecio,

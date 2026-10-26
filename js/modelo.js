@@ -152,12 +152,7 @@ const contarAgotados = () => productos.filter(p => estaAgotado(p)).length;
 const calcularValorInventario = () => productos.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
 
 // ---------- Reglas de negocio ----------
-
-// Valida los datos del formulario y devuelve TODOS los errores juntos.
-// Cada error es { mensaje, campos }; si no hay errores devuelve un arreglo vacío.
-// "campos" son nombres de campos (no elementos del HTML): la vista decide cuáles marcar.
-// idEditando es el producto que se edita (null si se crea) para que no choque consigo mismo.
-const validarProducto = (datos, idEditando = null) => {
+  const validarProducto = (datos, idEditando = null) => {
   const errores = [];
   const error = (mensaje, ...campos) => errores.push({ mensaje, campos });
 

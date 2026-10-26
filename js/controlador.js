@@ -92,7 +92,7 @@ const guardarFormulario = () => {
   }
 };
 
-// Registra todos los eventos de la página (se llama desde el arranque)
+// Registra todos los eventos de la página
 const registrarEventos = () => {
   // Menú lateral: abrir, cerrar y cerrar al elegir un enlace
   escuchar(botonMenuAbrir, 'click', abrirMenu);
@@ -107,7 +107,7 @@ const registrarEventos = () => {
     guardarTema(temaToggle.checked);
   });
 
-  // Panel plegable de filtros (se quita el onclick viejo del HTML, si quedó)
+  // Panel plegable de filtros
   if (botonFiltros) botonFiltros.removeAttribute('onclick');
   escuchar(botonFiltros, 'click', alternarFiltros);
 
@@ -185,7 +185,7 @@ const registrarEventos = () => {
     filtrarYRenderizar();
   });
 
-  // Limpiar todos los filtros del panel (la búsqueda de texto no se borra)
+  // Limpiar todos los filtros del panel
   escuchar(botonLimpiarFiltros, 'click', () => {
     categoriaSeleccionada = '';
     subcategoriaSeleccionada = '';
@@ -197,7 +197,7 @@ const registrarEventos = () => {
     filtrarYRenderizar();
   });
 
-  // Reto: restaurar datos de ejemplo (borra la clave y recarga la página)
+  // restaurar datos de ejemplo (borra la clave y recarga la página)
   escuchar(botonRestaurar, 'click', () => {
     if (window.confirm('¿Restaurar los datos de ejemplo? Se perderán los cambios del inventario.')) {
       restaurarProductos();
@@ -205,7 +205,7 @@ const registrarEventos = () => {
     }
   });
 
-  // Tarjetas: comprar, editar, ver detalles y eliminar (delegación de eventos y data-*)
+  // Tarjetas: comprar, editar, ver detalles y eliminar
   escuchar(catalogoGrid, 'click', (e) => {
     const botonComprar = e.target.closest('.btn-comprar');
     if (botonComprar) {
@@ -219,7 +219,7 @@ const registrarEventos = () => {
       return;
     }
 
-    // Editar va antes que "detalles" porque comparte su estilo
+    
     const botonEditar = e.target.closest('.btn-editar');
     if (botonEditar) {
       editarProducto(Number(botonEditar.dataset.id));
