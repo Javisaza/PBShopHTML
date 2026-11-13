@@ -1664,3 +1664,310 @@ footer p {
     width: 100%;
   }
 }
+
+/* ==========================================
+   TABLA DE DATOS (bloque BEM: tabla-datos)
+   ========================================== */
+.tabla-datos {
+  margin-top: 30px;
+}
+
+.tabla-datos__encabezado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.tabla-datos__titulo {
+  margin: 0;
+}
+
+.tabla-datos__controles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.tabla-datos__etiqueta {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.tabla-datos__select {
+  padding: 6px 10px;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+
+.tabla-datos__estado {
+  margin: 10px 0 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.tabla-datos__contenedor {
+  overflow-x: auto;
+}
+
+.tabla-datos__tabla {
+  min-width: 720px;
+}
+
+.tabla-datos__orden {
+  width: 100%;
+  padding: 0;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.tabla-datos__orden:focus-visible,
+.tabla-datos__pagina:focus-visible,
+.tabla-datos__boton:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+.tabla-datos th[aria-sort="ascending"] .tabla-datos__orden::after {
+  content: " ▲";
+}
+
+.tabla-datos th[aria-sort="descending"] .tabla-datos__orden::after {
+  content: " ▼";
+}
+
+.tabla-datos__fila:hover {
+  background-color: var(--card-alt-bg);
+}
+
+.tabla-datos__celda--vacia {
+  color: var(--text-muted);
+  padding: 24px;
+}
+
+.tabla-datos__celda--disponible {
+  color: var(--btn-success);
+  font-weight: bold;
+}
+
+.tabla-datos__celda--bajo {
+  color: #e6a100;
+  font-weight: bold;
+}
+
+.tabla-datos__celda--agotado {
+  color: var(--btn-danger);
+  font-weight: bold;
+}
+
+.tabla-datos__celda--acciones {
+  white-space: nowrap;
+}
+
+.tabla-datos__boton {
+  padding: 6px 12px;
+  margin: 0 3px;
+  border: none;
+  border-radius: 6px;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.tabla-datos__boton--editar {
+  background-color: var(--btn-secondary);
+}
+
+.tabla-datos__boton--editar:hover {
+  background-color: var(--btn-secondary-hover);
+}
+
+.tabla-datos__boton--eliminar {
+  background-color: var(--btn-danger);
+}
+
+.tabla-datos__boton--eliminar:hover {
+  background-color: var(--btn-danger-hover);
+}
+
+.tabla-datos__boton--exportar {
+  background-color: var(--btn-success);
+}
+
+.tabla-datos__boton--exportar:hover {
+  background-color: var(--btn-success-hover);
+}
+
+.tabla-datos__paginacion {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.tabla-datos__pagina {
+  min-width: 38px;
+  padding: 6px 10px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.tabla-datos__pagina:hover:not(:disabled) {
+  border-color: var(--accent-color);
+}
+
+.tabla-datos__pagina:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.tabla-datos__pagina--actual {
+  background-color: var(--btn-primary);
+  border-color: var(--btn-primary);
+  color: var(--text-dark);
+  font-weight: bold;
+}
+
+.tabla-datos__puntos {
+  color: var(--text-muted);
+}
+
+/* ==========================================
+   DIVISAS (bloque BEM: divisas) Y PRECIO EQUIVALENTE
+   ========================================== */
+.divisas {
+  padding: 20px;
+  margin: 30px 0;
+}
+
+.divisas__descripcion {
+  margin: 10px 0 16px;
+  color: var(--text-secondary);
+}
+
+.divisas__controles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.divisas__etiqueta {
+  font-weight: bold;
+}
+
+.divisas__select {
+  padding: 8px 12px;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+
+.divisas__boton {
+  padding: 8px 14px;
+  background-color: var(--btn-secondary);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.divisas__boton:hover {
+  background-color: var(--btn-secondary-hover);
+}
+
+.divisas__boton[hidden] {
+  display: none;
+}
+
+.divisas__estado {
+  min-height: 1.5em;
+  margin: 12px 0;
+  color: var(--text-secondary);
+}
+
+.divisas__estado--ok {
+  color: var(--btn-success);
+}
+
+.divisas__estado--error {
+  color: var(--btn-danger);
+  font-weight: bold;
+}
+
+.divisas__spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--border-color);
+  border-top-color: var(--accent-color);
+  border-radius: 50%;
+  vertical-align: middle;
+  animation: divisas-giro 0.8s linear infinite;
+}
+
+@keyframes divisas-giro {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.divisas__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+.divisas__tarjeta {
+  padding: 16px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  box-shadow: 0 2px 6px var(--shadow-color);
+  text-align: center;
+}
+
+.divisas__codigo {
+  margin: 0;
+  color: var(--accent-color);
+  font-size: 22px;
+}
+
+.divisas__nombre {
+  margin: 4px 0 10px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.divisas__equivalencia {
+  margin: 0;
+  font-weight: bold;
+}
+
+.producto__equivalente {
+  display: block;
+  margin-top: 2px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .divisas__spinner {
+    animation: none;
+  }
+}
