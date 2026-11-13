@@ -35,6 +35,7 @@
                 <a href="#inicio">Inicio</a>
                 <a href="#catalogo">Productos</a>
                 <a href="#resumen-registros">Tabla de registros</a>
+                <a href="#mensajes-contacto">Mensajes de contacto</a>
                 <a href="index.html">Ver tienda</a>
                 <div class="theme-container">
                     <span class="theme-label">Tema</span>
@@ -220,6 +221,28 @@
                     </section>
             </div>
         </section>
+
+        <section class="seccion" id="mensajes-contacto" aria-labelledby="titulo-contactos">
+            <h2 class="seccion_titulo" id="titulo-contactos">Mensajes de contacto</h2>
+            <p>Mensajes enviados desde el formulario de contacto de la tienda.</p>
+            <div class="tabla-responsive">
+                <table id="tabla-contacto">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Teléfono</th>
+                            <th scope="col">Dirección</th>
+                            <th scope="col">Ciudad</th>
+                            <th scope="col">Mensaje</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpo-contactos"></tbody>
+                </table>
+            </div>
+        </section>
     </main>
 
     <footer class="footer-principal">
@@ -244,6 +267,7 @@
     <script src="js/modelo/productos.js"></script>
     <script src="js/modelo/carrito.js"></script>
     <script src="js/modelo/tema.js"></script>
+    <script src="js/modelo/contactos.js"></script>
     <script src="js/modelo/tabla.js"></script>
     <script src="js/modelo/divisas.js"></script>
     <script src="js/servicios/api.js"></script>
