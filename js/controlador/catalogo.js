@@ -1,6 +1,6 @@
 // ==========================================
-// CONTROLADOR: escucha eventos y coordina Modelo y Vista
-// No contiene reglas de negocio ni HTML.
+// CONTROLADOR · catálogo: filtros, CRUD de productos y flujo del modal
+// Coordina Modelo y Vista. No contiene reglas de negocio ni HTML.
 // ==========================================
 
 // null = se está creando un producto; un id = se está editando ese producto
@@ -19,8 +19,9 @@ const escuchar = (elemento, evento, manejador) => {
   if (elemento) elemento.addEventListener(evento, manejador);
 };
 
-// Redibuja todo lo que depende de la lista de productos
-const filtrarYRenderizar = () => {
+// Redibuja todo lo que depende de la lista de productos.
+// reiniciarPagina = true cuando cambia un filtro (la tabla vuelve a la página 1)
+const filtrarYRenderizar = (reiniciarPagina = false) => {
   actualizarErrorPrecio(rangoPrecioInvalido(precioMinimo, precioMaximo));
 
   const resultado = obtenerProductosFiltrados({
@@ -32,15 +33,10 @@ const filtrarYRenderizar = () => {
     max: precioMaximo
   });
 
-  renderizarProductos(resultado);
+  renderizarProductos(resultado, obtenerConversionActual());
   actualizarContadorResultados(resultado.length);
-  renderizarTablaResumen(productos);
+  actualizarTablaDatos(resultado, reiniciarPagina);
   actualizarResumen(productos.length, contarAgotados(), calcularValorInventario());
-};
-
-// Redibuja la tabla del carrito
-const refrescarCarrito = () => {
-  renderizarCarrito(leerCarrito(), calcularTotalCarrito());
 };
 
 // ---------- CRUD ----------
@@ -92,26 +88,21 @@ const guardarFormulario = () => {
   }
 };
 
-// Registra todos los eventos de la página
-const registrarEventos = () => {
-  // Menú lateral: abrir, cerrar y cerrar al elegir un enlace
-  escuchar(botonMenuAbrir, 'click', abrirMenu);
-  escuchar(botonMenuCerrar, 'click', cerrarMenu);
-  escuchar(menuLateral, 'click', (e) => {
-    if (e.target.closest('a:not(.cerrar)')) cerrarMenu();
-  });
+// Pide confirmación y elimina (lo usan las tarjetas y la tabla)
+const eliminarConConfirmacion = (id) => {
+  const confirmar = window.confirm('¿Estás seguro de que deseas eliminar este producto del inventario?');
+  if (!confirmar) return;
 
-  // Tema claro/oscuro
-  escuchar(temaToggle, 'change', () => {
-    aplicarTema(temaToggle.checked);
-    guardarTema(temaToggle.checked);
-  });
+  eliminarProducto(id);
+  if (idEditando === id) cancelarEdicion();
+  filtrarYRenderizar();
+  mostrarAviso('✅ Producto eliminado.');
+};
 
-  // Panel plegable de filtros
-  if (botonFiltros) botonFiltros.removeAttribute('onclick');
-  escuchar(botonFiltros, 'click', alternarFiltros);
+// ---------- Eventos ----------
 
-  // Modal de agregar producto
+// Modal de agregar/editar producto y su formulario
+const registrarEventosFormulario = () => {
   escuchar(botonAbrirModal, 'click', abrirNuevo);
   escuchar(botonCerrarModal, 'click', cancelarEdicion);
   escuchar(botonCancelarModal, 'click', cancelarEdicion);
@@ -131,11 +122,23 @@ const registrarEventos = () => {
     cargarImagenSeleccionada(archivo);
   });
 
+  // Guardar producto (crear o editar) con validaciones y errores en la página
+  escuchar(formNuevoProducto, 'submit', (e) => {
+    e.preventDefault();
+    guardarFormulario();
+  });
+};
+
+// Búsqueda y filtros (todos se combinan entre sí)
+const registrarEventosFiltros = () => {
+  // Panel plegable de filtros
+  escuchar(botonFiltros, 'click', alternarFiltros);
+
   // Búsqueda en tiempo real
   escuchar(formBuscador, 'submit', (e) => e.preventDefault());
   escuchar(inputBusqueda, 'input', (e) => {
     textoBusqueda = e.target.value.trim();
-    filtrarYRenderizar();
+    filtrarYRenderizar(true);
   });
 
   // Filtros por categoría / subcategoría (delegación). Clic otra vez quita el filtro.
@@ -156,7 +159,7 @@ const registrarEventos = () => {
     }
 
     marcarFiltroActivo(categoriaSeleccionada, subcategoriaSeleccionada);
-    filtrarYRenderizar();
+    filtrarYRenderizar(true);
   });
 
   // Teclado en los títulos de categoría (accesibilidad)
@@ -169,20 +172,20 @@ const registrarEventos = () => {
     }
   });
 
-  // Filtro por estado de inventario y rango de precio (se combinan con lo demás)
+  // Filtro por estado de inventario y rango de precio
   escuchar(selectEstado, 'change', (e) => {
     estadoSeleccionado = e.target.value;
-    filtrarYRenderizar();
+    filtrarYRenderizar(true);
   });
 
   escuchar(inputPrecioMin, 'input', (e) => {
     precioMinimo = e.target.value.trim();
-    filtrarYRenderizar();
+    filtrarYRenderizar(true);
   });
 
   escuchar(inputPrecioMax, 'input', (e) => {
     precioMaximo = e.target.value.trim();
-    filtrarYRenderizar();
+    filtrarYRenderizar(true);
   });
 
   // Limpiar todos los filtros del panel
@@ -194,18 +197,20 @@ const registrarEventos = () => {
     precioMaximo = '';
     limpiarControlesFiltro();
     marcarFiltroActivo(categoriaSeleccionada, subcategoriaSeleccionada);
-    filtrarYRenderizar();
+    filtrarYRenderizar(true);
   });
 
-  // restaurar datos de ejemplo (borra la clave y recarga la página)
+  // Restaurar datos de ejemplo (borra la clave y recarga la página)
   escuchar(botonRestaurar, 'click', () => {
     if (window.confirm('¿Restaurar los datos de ejemplo? Se perderán los cambios del inventario.')) {
       restaurarProductos();
       location.reload();
     }
   });
+};
 
-  // Tarjetas: comprar, editar, ver detalles y eliminar
+// Tarjetas del catálogo: comprar, editar, ver detalles y eliminar (delegación)
+const registrarEventosTarjetas = () => {
   escuchar(catalogoGrid, 'click', (e) => {
     const botonComprar = e.target.closest('.btn-comprar');
     if (botonComprar) {
@@ -219,7 +224,6 @@ const registrarEventos = () => {
       return;
     }
 
-    
     const botonEditar = e.target.closest('.btn-editar');
     if (botonEditar) {
       editarProducto(Number(botonEditar.dataset.id));
@@ -233,74 +237,12 @@ const registrarEventos = () => {
     }
 
     const botonEliminar = e.target.closest('.btn-eliminar');
-    if (!botonEliminar) return;
-
-    const idAEliminar = Number(botonEliminar.dataset.id);
-    const confirmar = window.confirm('¿Estás seguro de que deseas eliminar este producto del inventario?');
-    if (!confirmar) return;
-
-    eliminarProducto(idAEliminar);
-    if (idEditando === idAEliminar) cancelarEdicion();
-    filtrarYRenderizar();
-    mostrarAviso('✅ Producto eliminado.');
-  });
-
-  // Guardar producto (crear o editar) con validaciones y errores en la página
-  escuchar(formNuevoProducto, 'submit', (e) => {
-    e.preventDefault();
-    guardarFormulario();
-  });
-
-  // Contacto: evita la recarga, confirma con el nombre y limpia el formulario
-  escuchar(formContacto, 'submit', (e) => {
-    e.preventDefault();
-
-    const campoNombre = document.getElementById('nombre');
-    const nombrePersona = campoNombre && campoNombre.value.trim() ? campoNombre.value.trim() : 'Usuario';
-
-    if (mensajeContactoExito) {
-      mensajeContactoExito.textContent = `¡Gracias ${nombrePersona}, tu mensaje ha sido enviado correctamente! Nos pondremos en contacto pronto.`;
-      mensajeContactoExito.classList.add('mostrar-exito');
-    }
-
-    formContacto.reset();
-  });
-
-  // Carrito: cambiar cantidad (mínimo 1, máximo el stock disponible)
-  escuchar(cuerpoCarrito, 'change', (e) => {
-    if (!e.target.classList.contains('input-cantidad')) return;
-
-    const mensaje = cambiarCantidadCarrito(Number(e.target.dataset.id), e.target.value);
-    if (mensaje) mostrarAviso(mensaje);
-    refrescarCarrito();
-  });
-
-  // Carrito: quitar producto
-  escuchar(cuerpoCarrito, 'click', (e) => {
-    const botonQuitar = e.target.closest('.btn-quitar-carrito');
-    if (!botonQuitar) return;
-
-    quitarDelCarrito(Number(botonQuitar.dataset.id));
-    refrescarCarrito();
-  });
-
-  // No permitir pagar con el carrito vacío
-  escuchar(formPedido, 'submit', (e) => {
-    if (leerCarrito().length > 0) return;
-    e.preventDefault();
-    mostrarAviso('⚠️ Tu carrito está vacío. Agrega al menos un producto.');
+    if (botonEliminar) eliminarConConfirmacion(Number(botonEliminar.dataset.id));
   });
 };
 
-// ==========================================
-// ARRANQUE (DOMContentLoaded)
-// ==========================================
-document.addEventListener('DOMContentLoaded', () => {
-  cargarProductos();
-  aplicarTema(temaGuardadoEsClaro());
-  construirFiltros();
-  cargarSubcategorias('');
-  registrarEventos();
-  filtrarYRenderizar();
-  refrescarCarrito();
-});
+const registrarEventosCatalogo = () => {
+  registrarEventosFormulario();
+  registrarEventosFiltros();
+  registrarEventosTarjetas();
+};
