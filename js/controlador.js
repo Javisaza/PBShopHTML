@@ -10,7 +10,7 @@ let idEditando = null;
 let categoriaSeleccionada = '';
 let subcategoriaSeleccionada = '';
 let textoBusqueda = '';
-let estadoSeleccionado = ''; // '', 'disponible', 'bajo' o 'agotado'
+let estadoSeleccionado = '';
 let precioMinimo = '';
 let precioMaximo = '';
 
