@@ -34,7 +34,7 @@
                 <a href="javascript:void(0)" class="cerrar" id="btn-menu-cerrar">&times;</a>
                 <a href="#inicio">Inicio</a>
                 <a href="#catalogo">Productos</a>
-                <a href="#resumen-registros">Resumen de registros</a>
+                <a href="#resumen-registros">Tabla de registros</a>
                 <a href="index.html">Ver tienda</a>
                 <div class="theme-container">
                     <span class="theme-label">Tema</span>
@@ -180,23 +180,44 @@
                     <!-- Contenedor de tarjetas: lo llena JavaScript -->
                     <div class="catalogo-grid" id="grid-productos"></div>
 
-                    <div id="resumen-registros">
-                    <h3>Resumen de registros</h3>
-                    <div class="tabla-responsive">
-                        <table id="tabla-resumen">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Categoría</th>
-                                    <th>Precio</th>
-                                    <th>Cantidad</th>
-                                </tr>
-                            </thead>
-                            <tbody id="cuerpo-resumen"></tbody>
-                        </table>
-                    </div>
-                    </div>
-                </div>
+                    <section class="tabla-datos" id="resumen-registros" aria-labelledby="titulo-tabla">
+                        <header class="tabla-datos__encabezado">
+                            <h3 class="tabla-datos__titulo" id="titulo-tabla">Tabla de registros</h3>
+                            <div class="tabla-datos__controles">
+                                <label class="tabla-datos__etiqueta" for="tabla-tamano">Filas por página</label>
+                                <select class="tabla-datos__select" id="tabla-tamano">
+                                    <option value="5" selected>5</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                </select>
+                                <button type="button" class="tabla-datos__boton tabla-datos__boton--exportar" id="btn-exportar-csv">
+                                    <i class="fa-solid fa-file-csv"></i> Exportar CSV
+                                </button>
+                            </div>
+                        </header>
+
+                        <p class="tabla-datos__estado" id="tabla-estado" role="status" aria-live="polite"></p>
+
+                        <div class="tabla-datos__contenedor">
+                            <table class="tabla-datos__tabla" id="tabla-resumen">
+                                <thead id="tabla-encabezado">
+                                    <tr>
+                                        <th scope="col" data-columna="id" aria-sort="ascending"><button type="button" class="tabla-datos__orden">ID</button></th>
+                                        <th scope="col" data-columna="nombre" aria-sort="none"><button type="button" class="tabla-datos__orden">Nombre</button></th>
+                                        <th scope="col" data-columna="categoria" aria-sort="none"><button type="button" class="tabla-datos__orden">Categoría</button></th>
+                                        <th scope="col" data-columna="subcategoria" aria-sort="none"><button type="button" class="tabla-datos__orden">Subcategoría</button></th>
+                                        <th scope="col" data-columna="precio" aria-sort="none"><button type="button" class="tabla-datos__orden">Precio</button></th>
+                                        <th scope="col" data-columna="cantidad" aria-sort="none"><button type="button" class="tabla-datos__orden">Cantidad</button></th>
+                                        <th scope="col" data-columna="estado" aria-sort="none"><button type="button" class="tabla-datos__orden">Estado</button></th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cuerpo-resumen"></tbody>
+                            </table>
+                        </div>
+
+                        <nav class="tabla-datos__paginacion" id="tabla-paginacion" aria-label="Paginación de la tabla"></nav>
+                    </section>
             </div>
         </section>
     </main>
@@ -220,8 +241,24 @@
         </div>
     </footer>
 
-    <script src="js/modelo.js"></script>
-    <script src="js/vista.js"></script>
-    <script src="js/controlador.js"></script>
+    <script src="js/modelo/productos.js"></script>
+    <script src="js/modelo/carrito.js"></script>
+    <script src="js/modelo/tema.js"></script>
+    <script src="js/modelo/tabla.js"></script>
+    <script src="js/modelo/divisas.js"></script>
+    <script src="js/servicios/api.js"></script>
+    <script src="js/vista/elementos.js"></script>
+    <script src="js/vista/catalogo.js"></script>
+    <script src="js/vista/formulario.js"></script>
+    <script src="js/vista/interfaz.js"></script>
+    <script src="js/vista/tabla.js"></script>
+    <script src="js/vista/divisas.js"></script>
+    <script src="js/vista/carrito.js"></script>
+    <script src="js/controlador/catalogo.js"></script>
+    <script src="js/controlador/tabla.js"></script>
+    <script src="js/controlador/divisas.js"></script>
+    <script src="js/controlador/interfaz.js"></script>
+    <script src="js/controlador/carrito.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
