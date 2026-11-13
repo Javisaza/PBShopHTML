@@ -136,12 +136,14 @@ Búsqueda y filtros combinados (categoría, subcategoría, texto, estado y rango
 
 - Íconos: [Font Awesome 6.4.0 (cdnjs)](https://fontawesome.com).
 - Tasas de cambio: [ExchangeRate-API](https://www.exchangerate-api.com).
-- Imágenes de productos y promociones: _(completar con la fuente de cada una)_.
+- Imágenes de productos: Compartidas por el dueño de Aurora-Arte & Cafe
+- Imágenes de promociones: Estas fueron extraidas de diferentes sitios de google 
 
 ## 10. Uso de inteligencia artificial
 
-_(Completar: para qué se usó, qué se verificó en la documentación oficial y que el equipo puede explicar todo el código. Esta misma sección va en el manual técnico.)_
+Fue utilizada para la organizacion del MVC para que estuviera mejor estructurada y documentacion del archivo asi como para la correcion de errores de codigo y el acompañamiento para la correcta implementacion de la API
 
 ## 11. Autores
 
-_(Integrantes del equipo)_
+- Javier Isaza Vasquez
+- Diego Alejandro Mazo Espinal
