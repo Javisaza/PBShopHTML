@@ -13,8 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
   registrarEventosTabla();
   registrarEventosDivisas();
   registrarEventosCarrito();
+  registrarEventosContactos();
 
   filtrarYRenderizar();
   refrescarCarrito();
+  refrescarContactos();
   cargarDivisas();
 });

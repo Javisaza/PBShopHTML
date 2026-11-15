@@ -52,6 +52,7 @@ const vistaPreviaImagen = document.getElementById('vista-previa-imagen');
 const inputDescripcion = document.getElementById('nueva-descripcion');
 
 const formContacto = document.getElementById('form-contacto');
+const cuerpoContactos = document.getElementById('cuerpo-contactos'); // solo en admin.html
 const mensajeContactoExito = document.getElementById('mensaje-contacto-exito');
 
 // Menú lateral, tema y panel plegable de filtros
