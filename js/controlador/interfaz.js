@@ -1,5 +1,5 @@
 // ==========================================
-// CONTROLADOR · interfaz general: menú, tema y contacto
+// CONTROLADOR · interfaz general: menú y tema
 // ==========================================
 
 const registrarEventosInterfaz = () => {
@@ -14,11 +14,5 @@ const registrarEventosInterfaz = () => {
   escuchar(temaToggle, 'change', () => {
     aplicarTema(temaToggle.checked);
     guardarTema(temaToggle.checked);
-  });
-
-  // Contacto: evita la recarga, confirma con el nombre y limpia el formulario
-  escuchar(formContacto, 'submit', (e) => {
-    e.preventDefault();
-    mostrarExitoContacto(leerNombreContacto() || 'Usuario');
   });
 };

@@ -1971,3 +1971,17 @@ footer p {
     animation: none;
   }
 }
+
+/* ==========================================
+   MENSAJES DE CONTACTO (admin.html)
+   El mensaje se limita a un ancho y el texto baja a la siguiente línea
+   ========================================== */
+#tabla-contacto .contacto__mensaje {
+  width: 320px;
+  max-width: 320px;
+  text-align: left;
+  white-space: pre-wrap;      /* respeta los saltos de línea que escribió la persona */
+  overflow-wrap: anywhere;    /* parte también las palabras o cadenas muy largas */
+  line-height: 1.4;
+  user-select: text;          /* permite copiar el mensaje */
+}
