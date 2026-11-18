@@ -3,8 +3,8 @@
 Tienda web universitaria con catálogo, carrito, panel de administración (CRUD) y consulta de tasas de cambio.
 Proyecto final de **Herramientas de Programación III (ET0056) · 2026-2** · I.U. Pascual Bravo.
 
-- **Integrantes:** _(completar con los nombres del equipo)_
-- **Publicado en:** _(completar con el enlace de GitHub Pages)_
+- **Integrantes:** Javier Isaza Vasquez, Diego Alejandro Mazo Espinal
+- **Publicado en:** https://javisaza.github.io/PBShopHTML/
 - **Repositorio:** https://github.com/Javisaza/PBShopHTML
 
 ## 1. Dominio
